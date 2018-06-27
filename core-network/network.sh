@@ -448,6 +448,10 @@ MODE=$1;shift
 # Determine whether starting, stopping, restarting or generating for announce
 if [ "$MODE" == "up" ]; then
   EXPMODE="Starting"
+elif [ "${MODE}" == "chaincode" ]; then
+  EXPMODE="Installing Chaincode"
+elif [ "${MODE}" == "test" ]; then
+  EXPMODE="Testing"
 elif [ "$MODE" == "down" ]; then
   EXPMODE="Stopping"
 elif [ "$MODE" == "restart" ]; then
@@ -498,6 +502,10 @@ askProceed
 #Create the network using docker compose
 if [ "${MODE}" == "up" ]; then
   networkUp
+elif [ "${MODE}" == "chaincode" ]; then
+  chaincodeInstall
+elif [ "${MODE}" == "test" ]; then
+  e2eTest
 elif [ "${MODE}" == "down" ]; then ## Clear the network
   networkDown
 elif [ "${MODE}" == "generate" ]; then ## Generate Artifacts

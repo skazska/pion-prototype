@@ -1,6 +1,7 @@
 bin
 config
-
+**/crypto-config
+**/channel-artifacts
 
 ### Node template
 # Logs

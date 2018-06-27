@@ -168,6 +168,26 @@ function networkUp () {
   fi
 }
 
+function chaincodeInstall () {
+
+  # now run the end to end script
+  docker exec cli scripts/install_chaincode.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT
+  if [ $? -ne 0 ]; then
+    echo "ERROR !!!! Script failed"
+    exit 1
+  fi
+}
+
+function e2eTest () {
+
+  docker exec cli scripts/run_test.sh $CHANNEL_NAME $CLI_DELAY $LANGUAGE $CLI_TIMEOUT
+  if [ $? -ne 0 ]; then
+    echo "ERROR !!!! Script failed"
+    exit 1
+  fi
+
+}
+
 # Upgrade the network from v1.0.x to v1.1
 # Stop the orderer and peers, backup the ledger from orderer and peers, cleanup chaincode containers and images
 # and relaunch the orderer and peers with latest tag
@@ -227,6 +247,15 @@ function upgradeNetwork () {
   fi
 }
 
+function pause () {
+  docker-compose -f $COMPOSE_FILE -f $COMPOSE_FILE_COUCH pause
+  docker-compose -f $COMPOSE_FILE pause
+}
+
+function unpause () {
+  docker-compose -f $COMPOSE_FILE -f $COMPOSE_FILE_COUCH unpause
+  docker-compose -f $COMPOSE_FILE unpause
+}
 
 # Tear down running network
 function networkDown () {
@@ -452,6 +481,10 @@ elif [ "${MODE}" == "chaincode" ]; then
   EXPMODE="Installing Chaincode"
 elif [ "${MODE}" == "test" ]; then
   EXPMODE="Testing"
+elif [ "$MODE" == "pause" ]; then
+  EXPMODE="Pausing"
+elif [ "$MODE" == "resume" ]; then
+  EXPMODE="Resuming"
 elif [ "$MODE" == "down" ]; then
   EXPMODE="Stopping"
 elif [ "$MODE" == "restart" ]; then
@@ -506,6 +539,10 @@ elif [ "${MODE}" == "chaincode" ]; then
   chaincodeInstall
 elif [ "${MODE}" == "test" ]; then
   e2eTest
+elif [ "$MODE" == "pause" ]; then
+  pause
+elif [ "$MODE" == "resume" ]; then
+  unpause
 elif [ "${MODE}" == "down" ]; then ## Clear the network
   networkDown
 elif [ "${MODE}" == "generate" ]; then ## Generate Artifacts

@@ -87,6 +87,21 @@ services:
     networks:
       - basic
 
+  ca.executor.prototype.rks.plus:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.executor.rks.plus
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.executor.rks.plus-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/d2ef4ca8a467f8139f403dfb63f0e19bb02ac378957a88fef5935739ecba82ae_sk
+    ports:
+      - "7054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/executor.rks.plus/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.executor.rks.plus
+    networks:
+      - basic
 
   peer0.executor.prototype.rks.plus:
     container_name: peer0.executor.prototype.rks.plus
@@ -106,6 +121,8 @@ services:
     ports:
       - 7051:7051
       - 7053:7053
+    depends_on:
+      - ca.executor.prototype.rks.plus
 
   peer1.executor.prototype.rks.plus:
     container_name: peer1.executor.prototype.rks.plus

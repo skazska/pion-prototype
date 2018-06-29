@@ -271,14 +271,16 @@ function networkDown () {
     #Cleanup images
     removeUnwantedImages
     # remove orderer block and other channel configuration transactions and certs
-    rm -rf channel-artifacts/*.block channel-artifacts/*.tx crypto-config ./org3-artifacts/crypto-config/ channel-artifacts/org3.json
+#    rm -rf channel-artifacts/*.block channel-artifacts/*.tx crypto-config ./org3-artifacts/crypto-config/ channel-artifacts/org3.json
     # remove the docker-compose yaml file that was customized to the example
-    rm -f docker-compose-e2e.yaml
+#    rm -f docker-compose-e2e.yaml
   fi
 }
 
 #calls generators
 function generate () {
+  rm -rf channel-artifacts/*.block channel-artifacts/*.tx crypto-config ./org3-artifacts/crypto-config/ channel-artifacts/org3.json
+  rm -f docker-compose-e2e.yaml
   generateCerts
 #  replacePrivateKey
   generateChannelArtifacts

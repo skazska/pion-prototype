@@ -22,7 +22,7 @@ COUNTER=1
 MAX_RETRY=5
 ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/orderer.prototype.rks.plus/orderers/orderer0.orderer.prototype.rks.plus/msp/tlscacerts/tlsca.orderer.prototype.rks.plus-cert.pem
 
-CC_SRC_PATH="github.com/chaincode/chaincode_example02/go/"
+CC_SRC_PATH="github.com/skazska/pion-prototype-chaincode"
 if [ "$LANGUAGE" = "node" ]; then
 	CC_SRC_PATH="/opt/gopath/src/github.com/chaincode/chaincode_example02/node/"
 fi

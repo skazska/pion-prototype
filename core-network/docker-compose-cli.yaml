@@ -42,7 +42,7 @@ services:
     command: /bin/bash
     volumes:
         - /var/run/:/host/var/run/
-        - ./../chaincode/:/opt/gopath/src/github.com/chaincode
+        - $GOPATH/src/github.com/skazska/:/opt/gopath/src/github.com/skazska/
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
         - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
         - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
@@ -91,15 +91,15 @@ services:
     image: hyperledger/fabric-ca
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.executor.rks.plus
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.executor.rks.plus-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/d2ef4ca8a467f8139f403dfb63f0e19bb02ac378957a88fef5935739ecba82ae_sk
+      - FABRIC_CA_SERVER_CA_NAME=ca.executor.prototype.rks.plus
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.executor.prototype.rks.plus-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/6533f136ad8d701460522ce5c1020aa6c5941c9709503ac340d00100360314ca_sk
     ports:
       - "7054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ./crypto-config/peerOrganizations/executor.rks.plus/ca/:/etc/hyperledger/fabric-ca-server-config
-    container_name: ca.executor.rks.plus
+      - ./crypto-config/peerOrganizations/executor.prototype.rks.plus/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.executor.prototype.rks.plus
     networks:
       - basic
 

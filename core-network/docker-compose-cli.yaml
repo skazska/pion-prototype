@@ -42,7 +42,8 @@ services:
     command: /bin/bash
     volumes:
         - /var/run/:/host/var/run/
-        - $GOPATH/src/github.com/skazska/:/opt/gopath/src/github.com/skazska/
+        - /home/ska/go/src/github.com/skazska:/opt/gopath/src/github.com/skazska/
+#        - $GOPATH/src/github.com/skazska/pion-prototype-chaincode:/opt/gopath/src/github.com/skazska/pion-prototype-chaincode/
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
         - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
         - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts

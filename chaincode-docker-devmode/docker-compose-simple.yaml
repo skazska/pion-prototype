@@ -60,7 +60,7 @@ services:
         - /var/run/:/host/var/run/
         - ./msp:/etc/hyperledger/msp
         - ./:/opt/gopath/src/chaincodedev/
-        - $GOPATH/src/github.com/skazska/pion-prototype-chaincode:/opt/gopath/src/chaincodedev/chaincode
+        - /home/ska/go/src/github.com/skazska/pion-prototype-chaincode:/opt/gopath/src/chaincodedev/chaincode
     depends_on:
       - orderer
       - peer
@@ -82,7 +82,7 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         - ./msp:/etc/hyperledger/msp
-        - $GOPATH/src/fabric/chaincode:/opt/gopath/src/chaincode
+        - /home/ska/go/src/github.com/skazska/pion-prototype-chaincode:/opt/gopath/src/chaincode
     depends_on:
       - orderer
       - peer

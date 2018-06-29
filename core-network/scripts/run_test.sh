@@ -30,17 +30,17 @@ echo "Channel name : "$CHANNEL_NAME
 
 # Query chaincode on peer0.org1
 echo "Querying chaincode on peer0.org1..."
-chaincodeQuery 0 Executor 100
+chaincodeQuery 0 Executor "123"
 
 # Invoke chaincode on peer0.org1
 echo "Sending invoke transaction on peer0.org1..."
-chaincodeInvoke 0 Executor
+chaincodeInvoke 0 Executor ""
 
 sleep 10
 
 # Query on chaincode on peer1.org2, check if the result is 90
 echo "Querying chaincode on peer1.org2..."
-chaincodeQuery 1 Producer 90
+chaincodeQuery 1 Producer "123"
 
 echo
 echo "========= All GOOD, e2e test execution completed =========== "
